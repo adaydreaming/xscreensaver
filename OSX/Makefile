@@ -1,6 +1,6 @@
 # XScreenSaver for MacOS X, Copyright (c) 2006-2012 by Jamie Zawinski.
 
-XCODEBUILD = /Developer/usr/bin/xcodebuild
+XCODEBUILD = /usr/bin/xcodebuild
 TARGETS    = -target "All Savers"
 ARCH       = -arch i386 -arch x86_64
 CERT       = 'Jamie Zawinski'
@@ -122,7 +122,8 @@ dmg:: distdepend check_versions
       perl -0 -ne							      \
      's/\\\\\\n//g; m/^RETIRED_GL_EXES\s*=\s*(.*)$$/m && print "$$1\n"'	      \
       ../hacks/glx/Makefile.in ;					      \
-     echo xscreensaver` ;						      \
+     echo xscreensaver ;						      \
+     echo savertester` ;						      \
 									      \
   for f in $$SRC/*.{saver,app} $$EXTRAS ; do				      \
    ok=yes ;								      \

@@ -1,4 +1,4 @@
-/* xscreensaver, Copyright (c) 2001-2008 by Jamie Zawinski <jwz@jwz.org>
+/* xscreensaver, Copyright (c) 2001-2012 by Jamie Zawinski <jwz@jwz.org>
  *
  * Permission to use, copy, modify, distribute, and sell this software and its
  * documentation for any purpose is hereby granted without fee, provided that
@@ -379,7 +379,7 @@ read_file_gdk (Screen *screen, Window window, Drawable drawable,
                   &root, &x, &y, &win_width, &win_height, &bw, &win_depth);
   }
 
-  gdk_pixbuf_xlib_init (dpy, screen_number (screen));
+  gdk_pixbuf_xlib_init_with_depth (dpy, screen_number (screen), win_depth);
 # ifdef HAVE_GTK2
   g_type_init();
 # else  /* !HAVE_GTK2 */
@@ -413,7 +413,7 @@ read_file_gdk (Screen *screen, Window window, Drawable drawable,
         int ow = w, oh = h;
         GdkPixbuf *opb = pb;
         pb = gdk_pixbuf_apply_embedded_orientation (opb);
-        gdk_pixbuf_unref (opb);
+        g_object_unref (opb);
         w = gdk_pixbuf_get_width (pb);
         h = gdk_pixbuf_get_height (pb);
         if (verbose_p && (w != ow || h != oh))
@@ -430,7 +430,7 @@ read_file_gdk (Screen *screen, Window window, Drawable drawable,
                                                     GDK_INTERP_BILINEAR);
           if (pb2)
             {
-              gdk_pixbuf_unref (pb);
+              g_object_unref (pb);
               pb = pb2;
               w = w2;
               h = h2;
